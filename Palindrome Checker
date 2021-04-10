@@ -1,12 +1,60 @@
-function palindrome(str) {
-  let lowerStr = str.toLowerCase("");
-  let modStr = lowerStr.replace(/[^0-9a-z]/gi, '');
-  let splitStr = modStr.split("");
-  let reverseStr = splitStr.reverse();
-  let newStr = reverseStr.join("");
-  if (newStr === modStr){
-    return true;
-  } else {
-    return false;
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palindrome Game</title>
+  <style>
+      body {
+        background-color: rgb(94, 94, 143);
+        text-align: center;
+        color: black;
+        font-size: 26px;
+        padding: 300px 0px;
+      }
+      #submit {
+        padding: 10px 20px;
+        font-size: 20px;
+      }
+  </style>
+</head>
+<body>
+    <p>
+        <strong>Is your word a Palindrome?<br>
+        Find out here!</strong>
+    </p>
+    <form id="form">
+        <p id="result">
+
+        </p>
+        <input type="text" id="palindrome"><br><br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <script>
+        function palindrome(word) {
+            let lowerStr = word.toLowerCase("");
+            let modStr = lowerStr.replace(/[^0-9a-z]/gi, '');
+            let splitStr = modStr.split("");
+            let reverseStr = splitStr.reverse();
+            let newWord = reverseStr.join("");
+                if (newWord === modStr){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+        const form = document.getElementById('form');
+        const result = document.getElementById('result');
+        const input = document.getElementById('palindrome')
+
+        function submit(event) {
+            let isPalindrome = palindrome(input.value);
+            result.textContent = isPalindrome ? 'Yay! It is a Palindrome.' : 'No, sorry. Try again!';
+            event.preventDefault();
+        }
+
+        form.addEventListener('submit', submit);
+    </script>
+</body>
+</html>
