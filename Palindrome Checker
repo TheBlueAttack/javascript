@@ -47,10 +47,13 @@
         const form = document.getElementById('form');
         const result = document.getElementById('result');
         const input = document.getElementById('palindrome')
+        let lastExec = null;
 
         function submit(event) {
             let isPalindrome = palindrome(input.value);
             result.textContent = isPalindrome ? 'Yay! It is a Palindrome.' : 'No, sorry. Try again!';
+            lastExec = new Date();
+            setTimeout(function () {if (((new Date()) - lastExec) > 5000) { result.textContent = '' }}, 5000);
             event.preventDefault();
         }
 
