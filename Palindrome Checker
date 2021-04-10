@@ -1,0 +1,12 @@
+function palindrome(str) {
+  let lowerStr = str.toLowerCase("");
+  let modStr = lowerStr.replace(/[^0-9a-z]/gi, '');
+  let splitStr = modStr.split("");
+  let reverseStr = splitStr.reverse();
+  let newStr = reverseStr.join("");
+  if (newStr === modStr){
+    return true;
+  } else {
+    return false;
+  }
+}
