@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caeser's Cipher</title>
+  <style>
+      body {
+        background-color: rgb(204, 77, 45);
+        text-align: center;
+        color: black;
+        font-size: 26px;
+        padding: 300px 0px;
+      }
+      #submit {
+        padding: 10px 20px;
+        font-size: 20px;
+      }
+  </style>
+</head>
+<body>
+    <p>
+        <strong>What does your Caeser's Cipher mean?<br>
+        Find out here!</strong>
+    </p>
+    <form id="form">
+        <p id="result">
+
+        </p>
+        <input type="text" id="cipher"><br><br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <script>
+        function rot13(str) {
+            var alphabets =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'," ", "-", "_", ".", "&","?", "!", "@", "#", "/"];
+        
+            var alphabets13 = ['N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M', " ", "-", "_", ".", "&","?", "!", "@", "#", "/"];
+        
+            var resultStr = [];
+            for(let i=0; i<str.length; i++){
+                for(let j =0; j<alphabets.length; j++){
+                    if(str[i] === alphabets[j]){
+                    resultStr.push(alphabets13[j]);
+                    }
+                }
+            }
+            return resultStr.join("");;
+        };
+
+        const form = document.getElementById('form');
+        const result = document.getElementById('result');
+        const input = document.getElementById('cipher')
+        let lastExec = null;
+
+        function submit(event) {
+            let ceasersCipher = rot13(input.value);
+            result.textContent = ceasersCipher;
+            lastExec = new Date();
+            setTimeout(function () {if (((new Date()) - lastExec) > 5000) { result.textContent = '' }}, 5000);
+            event.preventDefault();
+        }
+
+        form.addEventListener('submit', submit);
+    </script>
+</body>
+</html>
