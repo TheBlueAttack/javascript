@@ -1,12 +1,62 @@
-function convertToRoman(num) {
-  var lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},roman = '',i;
-  for ( i in lookup ) {
-    while ( num >= lookup[i] ) {
-      roman += i;
-      num -= lookup[i];
-    }
-  }
-  return roman;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roman Numeral Game</title>
+  <style>
+      body {
+        background-color: rgb(14, 174, 202);
+        text-align: center;
+        color: black;
+        font-size: 26px;
+        padding: 300px 0px;
+      }
+      #submit {
+        padding: 10px 20px;
+        font-size: 20px;
+      }
+  </style>
+</head>
+<body>
+    <p>
+        <strong>What is your number in Roman Numerals?<br>
+        Find out here!</strong>
+    </p>
+    <form id="form">
+        <p id="result">
 
-convertToRoman(36);
+        </p>
+        <input type="integer" id="numeral"><br><br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+
+    <script>
+        function convertToRoman(num) {
+                var lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},roman = '',i;
+                for ( i in lookup ) {
+                while ( num >= lookup[i] ) {
+                    roman += i;
+                    num -= lookup[i];
+                }
+                }
+                return roman;
+            }
+
+        const form = document.getElementById('form');
+        const result = document.getElementById('result');
+        const input = document.getElementById('numeral');
+        let lastExec = null;
+
+        function submit(event) {
+            let romanNumbers = convertToRoman(input.value);
+            result.textContent = romanNumbers;
+            lastExec = new Date();
+            setTimeout(function () {if (((new Date()) - lastExec) > 5000) { result.textContent = '' }}, 5000);
+            event.preventDefault();
+        }
+
+        form.addEventListener('submit', submit);
+    </script>
+</body>
+</html>
